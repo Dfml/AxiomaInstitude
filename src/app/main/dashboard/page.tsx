@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import TextBox from "./components/TextBox";
+import TextBox from "@/app/components/TextBox";
 import { useState } from "react";
-import Button from "./components/Button";
+import Button from "@/app/components/Button";
 
 export default function Home() {
   const [Correo, setCorreo] = useState("");
