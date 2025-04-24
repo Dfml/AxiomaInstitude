@@ -12,13 +12,15 @@ import BarraBusqueda from "@/app/components/BarraBusqueda";
 export default function Home() {
   return (
     <>
-    <div className="w-full  bg-putty-50 py-19 px-25 ">
-      
+    <div className="w-full flex h-fit justify-between  ">
       <BarraBusqueda className=""></BarraBusqueda>
-    </div>
+      <div className="flex gap-x-2 ">
+        <p className=" text-tangaroa-950 font-bold ">Nuevo Grupo</p>
+        
 
+      </div>
+    </div>
     <div></div>
     </>
-    
   );
 }
