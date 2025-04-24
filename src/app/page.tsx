@@ -4,6 +4,8 @@ import Image from "next/image";
 import TextBox from "./components/TextBox";
 import { useState } from "react";
 import Button from "./components/Button";
+import Link from "next/link";
+
 
 export default function Home() {
   const [Correo, setCorreo] = useState("");
@@ -39,9 +41,14 @@ export default function Home() {
             value={Password}
             onChange={(e) => setPassword(e.target.value)}
           ></TextBox>
-          <Button className="!mt-9 mb-1" label="Iniciar sesión"></Button>
+
+          <Link href="main/dashboard">
+            <Button className="!mt-9 mb-1" label="Iniciar sesión" ></Button>
+          </Link>
         </div>
       </div>
     </div>
   );
 }
+
+
