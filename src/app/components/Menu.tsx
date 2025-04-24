@@ -25,7 +25,7 @@ interface MenuItemsProps {
 export const navItems : MenuItemsProps[] = [
   {
     name: "Grupos",
-    href: "grupos",
+    href: "groups",
     icon: <UsersRound />
   },
   {

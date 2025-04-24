@@ -10,12 +10,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return  (
-
-    <div className="flex bg-putty-50   ">
+    <div className="flex bg-white  ">
      <Menu navItems={navItems} className=""></Menu>
-      <div className="flex w-full  py-19 px-25">{children}</div>
+      <div className=" flex flex-col w-full py-19 px-25">{children}</div>
       
-    </div>
+      </div>
     );
   }
 
