@@ -11,14 +11,14 @@ export default function GroupTable() {
 
       {/* Tabla */}
       <div className="overflow-x-auto">
-        <table className="w-full text-sm border border-blue-300 ">
-          <thead className="bg-blue-900 text-white">
+        <table className="w-full text-sm border border-tangaroa-950 ">
+          <thead className="bg-blue-900  text-white">
             <tr>
               {[
                 "Id grupo", "Curso dictado", "Nombre maestro", "Numero estudiante",
                 "Días de clase", "Horario de clase", "Estado grupo", "Acciones"
               ].map((header) => (
-                <th key={header} className="border px-2 py-2">{header}</th>
+                <th key={header} className="border border-tangaroa-950 px-2 py-2">{header}</th>
               ))}
             </tr>
           </thead>
@@ -28,7 +28,7 @@ export default function GroupTable() {
                 {Array(7).fill("-").map((val, i) => (
                   <td key={i} className="border px-2 py-1  border-tangaroa-950">{val}</td>
                 ))}
-                <td className="border  flex justify-center h-full  border-tangaroa-950 gap-2">
+                <td className="  flex-1 justify-center border px-2 py-1   border-tangaroa-950 ">
                   <button><Pencil size={16} className="text-blue-900" /></button>
                   <button><Trash2 size={16} className="text-red-500" /></button>
                 </td>
