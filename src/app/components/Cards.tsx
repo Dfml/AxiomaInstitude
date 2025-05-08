@@ -6,8 +6,6 @@ import { Trash2,  Pencil} from "lucide-react";
 
 interface CardsProps {
   label: string;
-  className: string;
-
   gruposActivos:string;
   maestroLibre:string;
   designacion: string;
@@ -16,7 +14,7 @@ interface CardsProps {
 
 }
 
-export default function Cards({label , className, gruposActivos, maestroLibre, designacion, cantidadEstudiantes }: CardsProps) {
+export default function Cards({label , gruposActivos, maestroLibre, designacion, cantidadEstudiantes }: CardsProps) {
   return (
     <div className="w-90 "> 
       <div className="bg-tangaroa-950 w-full h-25 rounded-t-2xl flex justify-end ">

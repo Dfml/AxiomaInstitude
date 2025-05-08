@@ -2,10 +2,29 @@
 
 import Cards from "@/app/components/Cards";
 
+export const cardItems = [
+  {
+    label: "Grupos",
+    gruposActivos: "groups",
+    maestroLibre:  "groups",
+    designacion:  "groups",
+    cantidadEstudiantes:  "groups",
+  },
+  {
+    label: "Grupos",
+    gruposActivos: "groups",
+    maestroLibre:  "groups",
+    designacion:  "groups",
+    cantidadEstudiantes:  "groups",
+  }
+];
+
 export default function Home() {
   return (
     <div className="">
-        <Cards label="" className=""></Cards>
+        {cardItems.map((card, index) => (
+          <Cards key={index} {...card} />
+        ))}
     </div>
   );
 }
