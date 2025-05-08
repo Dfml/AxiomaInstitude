@@ -8,7 +8,7 @@ interface SearchBarProps {
   className: string;
 }
 
-export default function Button({ className }: SearchBarProps) {
+export default function SearchBarProps({ className }: SearchBarProps) {
   return (
     <div className={"flex  items-center border border-tangaroa-950 rounded-md bg-tangaroa-50 px-3 py-2 w-150" + className}>
       <input

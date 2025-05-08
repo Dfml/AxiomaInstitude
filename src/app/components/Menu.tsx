@@ -30,7 +30,7 @@ export const navItems : MenuItemsProps[] = [
   },
   {
     name: "Gestion de cursos",
-    href: "dashboard",
+    href: "curseManagement",
     icon: <FolderDot/>,
   },
   {
