@@ -1,38 +1,51 @@
 'use client'
-import { Pencil, Trash2,Copy , PlusCircle, RotateCcw, Search } from "lucide-react";
+import { Pencil, Trash2, Copy } from "lucide-react";
 
-export default function GroupTable() {
-  const rows = Array(12).fill(null); // Simulación de datos vacíos
+type RowData = {
+  [key: string]: string | number;
+};
 
+interface GroupTableProps {
+  headers: string[];
+  rows: RowData[];
+}
+
+export default function GroupTable({ headers, rows }: GroupTableProps) {
   return (
-    <div className=" mt-10 rounded-lg">
-     
-   
-
-      {/* Tabla */}
+    <div className="mt-10 rounded-lg">
       <div className="overflow-x-auto">
-        <table className="w-full text-sm border border-tangaroa-950 ">
-          <thead className="bg-blue-900  text-white">
+        <table className="table-auto w-full border-collapse border border-tangaroa-950">
+          <thead>
             <tr>
-              {[
-                "Id grupo", "Curso dictado", "Nombre maestro", "Numero estudiante",
-                "Días de clase", "Horario de clase", "Estado grupo", "Acciones"
-              ].map((header) => (
-                <th key={header} className="border border-tangaroa-950 px-2 py-2">{header}</th>
+              {headers.map((header) => (
+                <th key={header} className="border bg-[rgba(229,229,229,1)] text-blue-950 border-tangaroa-950 px-2 py-2">
+                  {header}
+                </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {rows.map((_, index) => (
-              <tr key={index} className="border  text-center hover:bg-blue-50">
-                {Array(7).fill("-").map((val, i) => (
-                  <td key={i} className="border px-2 py-1  border-tangaroa-950">{val}</td>
+            {rows.map((row, index) => (
+              <tr key={index} className="text-center text-tangaroa-950 hover:bg-blue-50">
+                {headers.map((header, i) => (
+                  <td key={i} className="border border-tangaroa-950 px-2 py-1">
+                    {header === "Acciones" ? (
+                      <div className="flex justify-center gap-2">
+                        <button>
+                          <Pencil size={16} className="text-tangaroa-950 transition-all hover:text-putty-600" />
+                        </button>
+                        <button>
+                          <Trash2 size={16} className="text-tangaroa-950 transition-all hover:text-putty-600" />
+                        </button>
+                        <button>
+                          <Copy size={16} className="text-tangaroa-950 transition-all hover:text-putty-600" />
+                        </button>
+                      </div>
+                    ) : (
+                      row[header] ?? "-"
+                    )}
+                  </td>
                 ))}
-                <td className="  flex-1  border border-tangaroa-950 ">
-                  <button className="pl-3"><Pencil size={16} className="text-blue-900" /></button>
-                  <button className="pl-3"><Trash2 size={16} className="text-red-500" /></button>
-                  <button className="pl-3"><Copy size={16} className="text-blue-900"></Copy></button>
-                </td>
               </tr>
             ))}
           </tbody>

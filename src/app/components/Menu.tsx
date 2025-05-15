@@ -34,20 +34,20 @@ export const navItems : MenuItemsProps[] = [
     icon: <FolderDot/>,
   },
   {
-    name: "Perfil",
-    href: "dashboard",
+    name: "Alumnos",
+    href: "Students",
     icon: <GraduationCap />,
   },
 
   {
     name: "Maestros",
-    href: "dashboard",
+    href: "Teacher",
     icon: <School />,
   },
 
   {
     name: "Usuario Admin",
-    href: "dashboard",
+    href: "ManagerUsers",
     icon: <UserCog/>,
   },
 ];
