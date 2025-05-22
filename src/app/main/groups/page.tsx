@@ -15,8 +15,8 @@ import React, {  useState } from 'react';
 
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen, ] = useState(false);
- const [actualInfo, setActualInfo ] = useState<DatosGrup>({idGrupo:0,curso: "",maestro: "",numeroEstudiantes: 0, diasClase: "",horarioClase: "",estado: ""});
+const [isModalOpen, setIsModalOpen, ] = useState(false);
+const [actualInfo, setActualInfo ] = useState<DatosGrup>({idGrupo:0,curso: "",maestro: "",numeroEstudiantes: 0, diasClase: "",horarioClase: "",estado: ""});
 const handleInfoToModal = (info:DatosGrup) => {
     setActualInfo (info);
     // Aquí podrías hacer un fetch o llamar a una función que haga la petición a tu API
@@ -63,9 +63,9 @@ const handleUpdate = () => {
         </div>
       </div>
       <div>
-        <GroupTable headers={headers} rows={rows} onEdit={() => {setIsModalOpen(true)}} onEditButtom={handleInfoToModal} />
+        <GroupTable headers={headers} rows={rows} onEdit={() => {setIsModalOpen(true)}} onEditButton={handleInfoToModal} />
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-            <FormEditGrup {...actualInfo} ></FormEditGrup>
+            <FormEditGrup  data={actualInfo} onChange={setActualInfo}  ></FormEditGrup>
             <div className="flex justify-center mt-6">
           <Button
             label={"Actualizar"}

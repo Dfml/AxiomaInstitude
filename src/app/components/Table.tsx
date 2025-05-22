@@ -1,28 +1,24 @@
 'use client'
 import { Pencil, Trash2, Copy } from "lucide-react";
-import { DatosGrup } from "./FormEditGrup";
-type RowData = {
-    idGrupo: number,
-    curso: string,
-    maestro: string,
-    numeroEstudiantes: number,
-    diasClase: string,
-    horarioClase: string,
-    estado: string,
-};
 
-interface GroupTableProps {
+
+interface GroupTableProps<T> {
   headers: string[];
-  rows: RowData[];
+  rows: T[];
   onEdit: () => void;
-  onEditButtom:(row:DatosGrup) => void;
+  onEditButton:(row: T) => void;
 }
 
 
 
 
 
-export default function GroupTable({ headers, rows ,onEdit,onEditButtom }: GroupTableProps) {
+export default function GroupTable<T extends Record<string, any>>({
+  headers,
+  rows,
+  onEdit,
+  onEditButton,
+}:  GroupTableProps<T>) {
   return (
     <div className="mt-10 rounded-lg">
       <div className="overflow-x-auto">
@@ -40,14 +36,14 @@ export default function GroupTable({ headers, rows ,onEdit,onEditButtom }: Group
             {rows.map((row, index) => (
               <tr key={index} className="text-center text-tangaroa-950 hover:bg-blue-50">
 
-               {Object.keys(row).map((key) => (
-                  <td key={key} className="border border-tangaroa-950 px-2 py-1">
-                    {row[key as keyof RowData]}
+               {Object.values(row).map((value,i) => (
+                  <td key={i} className="border border-tangaroa-950 px-2 py-1">
+                     {value}
                   </td>
                 ))}
                   <td className="border border-tangaroa-950 px-2 py-1">
                       <div className="flex justify-center gap-2">
-                        <button onClick={()=>{onEdit(),onEditButtom(row)}}>
+                        <button onClick={()=>{onEdit(),onEditButton(row)}}>
                           <Pencil size={16} className="text-tangaroa-950 transition-all hover:text-putty-600" />
                         </button>
                         <button>
