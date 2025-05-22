@@ -32,7 +32,7 @@ export default function Home() {
   return (
       <div className="p-10 flex flex-wrap gap-6">
       {dataCart.map((item, index) => (
-        <Cards className="h-80 "
+        <Cards 
           key={index}
           label={`${item.curso}`}
           data={[

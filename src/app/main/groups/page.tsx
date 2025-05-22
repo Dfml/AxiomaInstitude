@@ -3,40 +3,52 @@ import SearchBar from "@/app/components/SearchBar";
 import GroupTable from "@/app/components/Table";
 import ReloadButton from "@/app/components/ReloadButton";
 import PlusButton from "@/app/components/PlusButton";
-export default function Home() {
+import Modal from "@/app/components/Modal"
+import FormEditGrup from "@/app/components/FormEditGrup";
+import Button from "@/app/components/Button";
+import { DatosGrup } from "@/app/components/FormEditGrup";
 
+import React, {  useState } from 'react';
 
-const headers = [
-  "Id grupo",
-  "Curso dictado",
-  "Nombre maestro",
-  "Numero estudiante",
-  "Días de clase",
-  "Horario de clase",
-  "Estado grupo",
-  "Acciones",
-]
-const rows = [
-  {
-    "Id grupo": 1,
-    "Curso dictado": "Matemáticas",
-    "Nombre maestro": "Juan Pérez",
-    "Numero estudiante": 10,
-    "Días de clase": "Lun - Mié",
-    "Horario de clase": "08:00 - 10:00",
-    "Estado grupo": "Activo"
-  },
   
-  {
-    "Id grupo": 2,
-    "Curso dictado": "Física",
-    "Nombre maestro": "Ana Gómez",
-    "Numero estudiante": 9,
-    "Días de clase": "Mar - Jue",
-    "Horario de clase": "10:00 - 12:00",
-    "Estado grupo": "Inactivo"
-  }
-];
+ 
+
+
+export default function Home() {
+  const [isModalOpen, setIsModalOpen, ] = useState(false);
+ const [actualInfo, setActualInfo ] = useState<DatosGrup>({idGrupo:0,curso: "",maestro: "",numeroEstudiantes: 0, diasClase: "",horarioClase: "",estado: ""});
+const handleInfoToModal = (info:DatosGrup) => {
+    setActualInfo (info);
+    // Aquí podrías hacer un fetch o llamar a una función que haga la petición a tu API
+  };
+
+  
+const handleUpdate = () => {
+    console.log("Datos a actualizar:", rows);
+    // Aquí podrías hacer un fetch o llamar a una función que haga la petición a tu API
+  };
+
+
+  const headers = [
+    "Id grupo",
+    "Curso dictado",
+    "Nombre maestro",
+    "Numero estudiante",
+    "Días de clase",
+    "Horario de clase",
+    "Estado grupo",
+    "Acciones",
+  ]
+  const rows = [
+    {
+      idGrupo:1,curso: "fisica",maestro: "",numeroEstudiantes: 100, diasClase: "asdasd",horarioClase: "",estado: ""
+    },
+
+    {
+     idGrupo:2,curso: "fisica",maestro: "",numeroEstudiantes: 0, diasClase: "asdasd",horarioClase: "",estado: ""
+    }
+  ];
+
 
 
   return (
@@ -48,13 +60,20 @@ const rows = [
           <PlusButton className=" "></PlusButton>
 
           <ReloadButton className=" "  ></ReloadButton>
-
-
-
         </div>
       </div>
       <div>
-         <GroupTable headers={headers} rows={rows} ></GroupTable>
+        <GroupTable headers={headers} rows={rows} onEdit={() => {setIsModalOpen(true)}} onEditButtom={handleInfoToModal} />
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+            <FormEditGrup {...actualInfo} ></FormEditGrup>
+            <div className="flex justify-center mt-6">
+          <Button
+            label={"Actualizar"}
+            className="bg-[#B15B29] text-white font-semibold hover:bg-[#944a20] transition-colors !mt-5"
+            onClick={handleUpdate}
+          />
+        </div>
+        </Modal>
       </div>
     </>
   );
