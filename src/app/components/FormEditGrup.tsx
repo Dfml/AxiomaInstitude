@@ -11,40 +11,46 @@ export interface DatosGrup{
     diasClase: string,
     horarioClase: string,
     estado: string,
-    
-    
-
 }
 
-export default function GroupFormEdit({ ...rest }: DatosGrup) {
-  const [formData, setFormData] = useState(rest);
+interface GroupFormEditProps {
+  data: DatosGrup;
+  onChange?: (updated: DatosGrup) => void; // opcional para enviar cambios hacia afuera
+}
 
-  
+export default function GroupFormEdit({ data, onChange }: GroupFormEditProps) {
+  const [formData, setFormData] = useState(data);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    const updatedData = {
+      ...formData,
+      [name]:
+        name === 'numeroEstudiantes' ? parseInt(value) || 0 : value,
+    };
+    setFormData(updatedData);
+    onChange?.(updatedData); // notificar cambios
   };
 
   const incrementStudents = () => {
-    setFormData((prev) => ({
-      ...prev,
-      numeroEstudiantes: prev.numeroEstudiantes + 1,
-    }));
+    const updated = {
+      ...formData,
+      numeroEstudiantes: formData.numeroEstudiantes + 1,
+    };
+    setFormData(updated);
+    onChange?.(updated);
   };
 
   const decrementStudents = () => {
-    setFormData((prev) => ({
-      ...prev,
-      numeroEstudiantes: Math.max(0, prev.numeroEstudiantes - 1),
-    }));
+    const updated = {
+      ...formData,
+      numeroEstudiantes: Math.max(0, formData.numeroEstudiantes - 1),
+    };
+    setFormData(updated);
+    onChange?.(updated);
   };
-
   return (
     <div className=" flex  gap-x-10 gap-y-6 text-[#0C2340] text-sm " >
     
