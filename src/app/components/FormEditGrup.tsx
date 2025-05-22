@@ -76,7 +76,6 @@ export default function GroupFormEdit({ ...rest }: DatosGrup) {
       id="diasClase"
       name="diasClase"
       value={formData.diasClase}  // asegúrate que este campo exista en formData
-      readOnly
       className="border border-[#0C2340] rounded-md px-3 py-2 placeholder:text-[#0C2340] placeholder:italic bg-[#F0F4F8]"
     />
   </div>
