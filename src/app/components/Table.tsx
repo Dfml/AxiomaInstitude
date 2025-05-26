@@ -5,7 +5,8 @@ import { Pencil, Trash2, Copy } from "lucide-react";
 interface GroupTableProps<T> {
   headers: string[];
   rows: T[];
-  onEdit: () => void;
+  OpenOnEditModal: () => void;
+  OpenOnDeletetModal: () => void;
   onEditButton:(row: T) => void;
 }
 
@@ -16,7 +17,8 @@ interface GroupTableProps<T> {
 export default function GroupTable<T extends Record<string, any>>({
   headers,
   rows,
-  onEdit,
+  OpenOnDeletetModal,
+  OpenOnEditModal,
   onEditButton,
 }:  GroupTableProps<T>) {
   return (
@@ -43,10 +45,10 @@ export default function GroupTable<T extends Record<string, any>>({
                 ))}
                   <td className="border border-tangaroa-950 px-2 py-1">
                       <div className="flex justify-center gap-2">
-                        <button onClick={()=>{onEdit(),onEditButton(row)}}>
+                        <button onClick={()=>{onEditButton(row),OpenOnEditModal()}}>
                           <Pencil size={16} className="text-tangaroa-950 transition-all hover:text-putty-600" />
                         </button>
-                        <button>
+                        <button onClick={()=>{onEditButton(row),OpenOnDeletetModal()}}>
                           <Trash2 size={16} className="text-tangaroa-950 transition-all hover:text-putty-600" />
                         </button>
                         <button>

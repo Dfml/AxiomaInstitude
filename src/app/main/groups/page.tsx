@@ -4,9 +4,10 @@ import GroupTable from "@/app/components/Table";
 import ReloadButton from "@/app/components/ReloadButton";
 import PlusButton from "@/app/components/PlusButton";
 import Modal from "@/app/components/Modal"
-import FormEditGrup from "@/app/components/FormEditGrup";
+import FormEditGroup from "@/app/components/FormEditGroup";
 import Button from "@/app/components/Button";
-import { DatosGrup } from "@/app/components/FormEditGrup";
+import { DatosGrup } from "@/app/components/FormEditGroup";
+
 
 import React, {  useState } from 'react';
 
@@ -15,14 +16,19 @@ import React, {  useState } from 'react';
 
 
 export default function Home() {
-const [isModalOpen, setIsModalOpen, ] = useState(false);
+const [isModalOpenEdit, setIsModalOpenEdit ] = useState(false);
+const [typeOfModal, setTypeOfModal ] = useState("");
+
 const [actualInfo, setActualInfo ] = useState<DatosGrup>({idGrupo:0,curso: "",maestro: "",numeroEstudiantes: 0, diasClase: "",horarioClase: "",estado: ""});
 const handleInfoToModal = (info:DatosGrup) => {
     setActualInfo (info);
     // Aquí podrías hacer un fetch o llamar a una función que haga la petición a tu API
   };
 
-  
+  const handleOpenModal = ( action:boolean, type:string) => {
+    setTypeOfModal(type);
+    setIsModalOpenEdit(action);
+  };
 const handleUpdate = () => {
     console.log("Datos a actualizar:", rows);
     // Aquí podrías hacer un fetch o llamar a una función que haga la petición a tu API
@@ -57,22 +63,20 @@ const handleUpdate = () => {
         <SearchBar className="" placeholder="Buscar grupo"></SearchBar>
         <div className="flex gap-x-2 items-center ">
           <p className=" text-tangaroa-950 font-bold  ">Nuevo Grupo</p>
-          <PlusButton className=" "></PlusButton>
+          <PlusButton OpenOnPlusModal={()=> handleOpenModal(true,"new")} className=" ">
+
+          
+
+          </PlusButton>
+
 
           <ReloadButton className=" "  ></ReloadButton>
         </div>
       </div>
       <div>
-        <GroupTable headers={headers} rows={rows} onEdit={() => {setIsModalOpen(true)}} onEditButton={handleInfoToModal} />
-        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-            <FormEditGrup  data={actualInfo} onChange={setActualInfo}  ></FormEditGrup>
-            <div className="flex justify-center mt-6">
-          <Button
-            label={"Actualizar"}
-            className="bg-[#B15B29] text-white font-semibold hover:bg-[#944a20] transition-colors !mt-5"
-            onClick={handleUpdate}
-          />
-        </div>
+        <GroupTable headers={headers} rows={rows} OpenOnEditModal={() => {handleOpenModal(true,"edit")}} onEditButton={handleInfoToModal}  OpenOnDeletetModal={() => {handleOpenModal(true,"Delete")}}/>
+        <Modal   isOpen={isModalOpenEdit} onClose={() => handleOpenModal(false,"edit")}>
+            <FormEditGroup  data={actualInfo} onChange={setActualInfo} type={typeOfModal} ></FormEditGroup>
         </Modal>
       </div>
     </>
