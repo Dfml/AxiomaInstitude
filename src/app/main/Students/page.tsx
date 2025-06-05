@@ -3,70 +3,99 @@ import SearchBar from "@/app/components/SearchBar";
 import GroupTable from "@/app/components/Table";
 import ReloadButton from "@/app/components/ReloadButton";
 import PlusButton from "@/app/components/PlusButton";
+import {DataStudents} from "@/app/components/FormStudents";
+import FormStudents from "@/app/components/FormStudents"; 
+import  Modal from "@/app/components/Modal"
+
+import React, {  useState } from 'react';
+
+
+
+
 export default function Home() {
+const [isModalOpenEdit, setIsModalOpenEdit ] = useState(false);
+const [typeOfModal, setTypeOfModal ] = useState("");
+
+const [actualInfo, setActualInfo ] = useState<DataStudents>({idAlumno:0,Nombres: "",Apellidos: "",Corrreo: "", Telefono: "",ValoracionEscolar: "",ValoracionBiblica: "", Estado:false});
+const handleInfoToModal = (info:DataStudents) => {
+    setActualInfo (info);
+    // Aquí podrías hacer un fetch o llamar a una función que haga la petición a tu API
+  };
+
+  const handleOpenModal = ( action:boolean, type:string) => {
+    setTypeOfModal(type);
+    setIsModalOpenEdit(action);
+  };
+const handleUpdate = () => {
+    console.log("Datos a actualizar:", rows);
+    // Aquí podrías hacer un fetch o llamar a una función que haga la petición a tu API
+  };
+
 
 
 const headers = [
-  "Id Alumno",
+  "ID Alumno",
   "Nombres",
-  "Apelidos",
+  "Apellidos",
   "Correo",
-  "Telefono",
-  "Valoracion Escolar",
-  "Valoracion Biblica ",
+  "Teléfono",
+  "Valoración Escolar",
+  "Valoración Bíblica",
   "Estado",
-  "Acciones",
-]
+  "Acciones"
+];
+
 const rows = [
   {
-    "Id Alumno": 1,
-    "Nombres": "Dante",
-    "Apelidos": "Ramírez",
-    "Correo": "dante.ramirez@email.com",
-    "Telefono": "+52 123 456 7890",
-    "Valoracion Escolar": "Excelente",
-    "Valoracion Biblica ": "Alta",
-    "Estado": "Activo",
+    idAlumno: 1,
+    Nombres: "Juan",
+    Apellidos: "Pérez",
+    Corrreo: "juan.perez@example.com",
+    Telefono: "123456789",
+    ValoracionEscolar: "Excelente",
+    ValoracionBiblica: "Buena",
+    Estado: true
   },
   {
-    "Id Alumno": 2,
-    "Nombres": "Isabela",
-    "Apelidos": "Gómez",
-    "Correo": "isabela.gomez@email.com",
-    "Telefono": "+52 098 765 4321",
-    "Valoracion Escolar": "Buena",
-    "Valoracion Biblica ": "Media",
-    "Estado": "Activo",
-  },
-  {
-    "Id Alumno": 3,
-    "Nombres": "Miguel",
-    "Apelidos": "Santos",
-    "Correo": "miguel.santos@email.com",
-    "Telefono": "+52 555 123 4567",
-    "Valoracion Escolar": "Regular",
-    "Valoracion Biblica ": "Baja",
-    "Estado": "Inactivo",
+    idAlumno: 2,
+    Nombres: "María",
+    Apellidos: "González",
+    Corrreo: "maria.gonzalez@example.com",
+    Telefono: "987654321",
+    ValoracionEscolar: "Regular",
+    ValoracionBiblica: "Excelente",
+    Estado: false
   }
 ];
 
+
   return (
+    
     <>
-      <div className="w-full flex h-fit justify-between ">
-        <SearchBar className="" placeholder="Buscar Alumno"></SearchBar>
-        <div className="flex gap-x-2 items-center ">
-          <p className=" text-tangaroa-950 font-bold  ">Nuevo Alumno</p>
-          <PlusButton className=" "></PlusButton>
-
-          <ReloadButton className=" "  ></ReloadButton>
-
-
-
-        </div>
-      </div>
-      <div>
-         <GroupTable headers={headers} rows={rows} ></GroupTable>
-      </div>
+     <div className="w-full flex h-fit justify-between ">
+            <SearchBar className="" placeholder="Buscar grupo"></SearchBar>
+            <div className="flex gap-x-2 items-center ">
+              <p className=" text-tangaroa-950 font-bold  ">Nuevo Grupo</p>
+              <PlusButton OpenOnPlusModal={()=> handleOpenModal(true,"new")} className=" ">
+    
+              
+    
+              </PlusButton>
+    
+    
+              <ReloadButton className=" "  ></ReloadButton>
+            </div>
+          </div>
+          <div>
+            <GroupTable headers={headers} rows={rows} OpenOnEditModal={() => {handleOpenModal(true,"edit")}} onEditButton={handleInfoToModal}  OpenOnDeletetModal={() => {handleOpenModal(true,"Delete")}}/>
+            <Modal   isOpen={isModalOpenEdit} onClose={() => handleOpenModal(false,"edit")}>
+                <FormStudents  data={actualInfo} onChange={setActualInfo} type={typeOfModal} ></FormStudents>
+            </Modal>
+          </div>
+    
+    
+    
+    
     </>
   );
 }

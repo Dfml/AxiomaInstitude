@@ -4,9 +4,9 @@ import GroupTable from "@/app/components/Table";
 import ReloadButton from "@/app/components/ReloadButton";
 import PlusButton from "@/app/components/PlusButton";
 import Modal from "@/app/components/Modal"
-import FormEditGroup from "@/app/components/FormEditGroup";
-import Button from "@/app/components/Button";
-import { DatosGrup } from "@/app/components/FormEditGroup";
+import FormEditGroup from "@/app/components/FormGroup";
+
+import { DatosGrup } from "@/app/components/FormGroup";
 
 
 import React, {  useState } from 'react';
@@ -63,13 +63,7 @@ const handleUpdate = () => {
         <SearchBar className="" placeholder="Buscar grupo"></SearchBar>
         <div className="flex gap-x-2 items-center ">
           <p className=" text-tangaroa-950 font-bold  ">Nuevo Grupo</p>
-          <PlusButton OpenOnPlusModal={()=> handleOpenModal(true,"new")} className=" ">
-
-          
-
-          </PlusButton>
-
-
+          <PlusButton OpenOnPlusModal={()=> handleOpenModal(true,"new")} className=" "></PlusButton>
           <ReloadButton className=" "  ></ReloadButton>
         </div>
       </div>

@@ -163,7 +163,7 @@ export default function GroupFormEdit({
           </select>
         </div>
 
-        {/* Segunda lista: últimos 3 campos */}
+ 
 
         <div className="flex flex-col w-[350px]">
           <label htmlFor="estado" className="mb-1 font-semibold">

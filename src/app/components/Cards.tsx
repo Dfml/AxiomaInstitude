@@ -8,16 +8,21 @@ interface CardsProps {
     label: string;
     value: string | number;
     isPassword?: boolean; // Identifica si es campo contraseña
+    
+
   }[];
+    OpenOnEditModal: () => void;
+    OpenOnDeletetModal: () => void;
+    onEditButton:() => void;
 }
 
-export default function Cards({  label, data }: CardsProps) {
+export default function Cards({  label, data,onEditButton,OpenOnEditModal,OpenOnDeletetModal}: CardsProps) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="w-90 mr-10 shadow-lg rounded-2xl overflow-hidden">
       <div className="bg-tangaroa-950 w-full h-25 flex justify-end">
-        <button className="h-5 p-3 hover:text-red-800 transition-all">
+        <button onClick={()=>{OpenOnDeletetModal(),onEditButton()}} className="h-5 p-3 hover:text-red-800 transition-all">
           <Trash2 />
         </button>
       </div>
@@ -29,7 +34,7 @@ export default function Cards({  label, data }: CardsProps) {
           ))}
         </ul>
         <ul>
-          <li><Pencil size={30} /></li>
+          <li onClick={()=>{onEditButton(),OpenOnEditModal()}}  ><Pencil size={30} /></li>
           {data.map((item, idx) => {
             if (item.isPassword) {
               return (
@@ -59,3 +64,4 @@ export default function Cards({  label, data }: CardsProps) {
     </div>
   );
 }
+

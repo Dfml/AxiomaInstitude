@@ -3,7 +3,38 @@
 
 import { Plus} from "lucide-react";
 import Cards from "@/app/components/Cards";
-import CardPlusButton from "@/app/components/CardPlusButton"
+import CardPlusButton from "@/app/components/CardPlusButton";
+import Modal from "@/app/components/Modal";
+import FormManagerCourse from "@/app/components/FormManageCourse"
+import{DataCours} from "@/app/components/FormManageCourse"
+import React, {  useState } from 'react';
+
+
+
+
+
+
+
+export default function Home() {
+
+
+const [isModalOpenEdit, setIsModalOpenEdit ] = useState(false);
+const [typeOfModal, setTypeOfModal ] = useState("");
+
+const [actualInfo, setActualInfo ] = useState<DataCours>({NombreCurso:"", });
+const handleInfoToModal = (info:DataCours) => {
+    setActualInfo (info);
+    // Aquí podrías hacer un fetch o llamar a una función que haga la petición a tu API
+  };
+
+  const handleOpenModal = ( action:boolean, type:string) => {
+    setTypeOfModal(type);
+    setIsModalOpenEdit(action);
+  };
+const handleUpdate = () => {
+    console.log("Datos a actualizar:",);
+    // Aquí podrías hacer un fetch o llamar a una función que haga la petición a tu API
+  };
 
 
 const dataCart = [
@@ -26,13 +57,10 @@ const dataCart = [
 
 
 
-
-
-export default function Home() {
   return (
       <div className="p-10 flex flex-wrap gap-6">
       {dataCart.map((item, index) => (
-        <Cards 
+        <Cards OpenOnEditModal={() => {handleOpenModal(true,"edit")}} onEditButton={()=>handleInfoToModal({NombreCurso:item.curso})}  OpenOnDeletetModal={() => {handleOpenModal(true,"Delete")}} 
           key={index}
           label={`${item.curso}`}
           data={[
@@ -44,7 +72,11 @@ export default function Home() {
         />
       ))}
 
-      <CardPlusButton ></CardPlusButton>
+        <CardPlusButton OpenOnPlusModal={()=> handleOpenModal(true,"new")} ></CardPlusButton>
+
+             <Modal   isOpen={isModalOpenEdit} onClose={() => handleOpenModal(false,"edit")}>
+              <FormManagerCourse data={actualInfo} onChange={setActualInfo} type={typeOfModal}></FormManagerCourse>
+            </Modal>
     </div>
   );
 }
