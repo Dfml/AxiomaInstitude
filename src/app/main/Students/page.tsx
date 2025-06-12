@@ -3,8 +3,8 @@ import SearchBar from "@/app/components/SearchBar";
 import GroupTable from "@/app/components/Table";
 import ReloadButton from "@/app/components/ReloadButton";
 import PlusButton from "@/app/components/PlusButton";
-import {DataStudents} from "@/app/components/FormStudents";
-import FormStudents from "@/app/components/FormStudents"; 
+import { StudentData } from "@/app/components/FormStudents";
+import StudentFormEdit from "@/app/components/FormStudents"; 
 import  Modal from "@/app/components/Modal"
 
 import React, {  useState } from 'react';
@@ -16,10 +16,19 @@ export default function Home() {
 const [isModalOpenEdit, setIsModalOpenEdit ] = useState(false);
 const [typeOfModal, setTypeOfModal ] = useState("");
 
-const [actualInfo, setActualInfo ] = useState<DataStudents>({idAlumno:0,Nombres: "",Apellidos: "",Corrreo: "", Telefono: "",ValoracionEscolar: "",ValoracionBiblica: "", Estado:false});
-const handleInfoToModal = (info:DataStudents) => {
-    setActualInfo (info);
-    // Aquí podrías hacer un fetch o llamar a una función que haga la petición a tu API
+const [actualInfo, setActualInfo] = useState<StudentData>({
+  studentId: 0,
+  firstName: "",
+  lastName: "",
+  email: "",
+  phone: "",
+  academicRating: "",
+  biblicalRating: "",
+  status: false,
+});
+const handleInfoToModal = (info: StudentData) => {
+  setActualInfo(info);
+  // Aquí podrías hacer un fetch o llamar a una función que haga la petición a tu API
   };
 
   const handleOpenModal = ( action:boolean, type:string) => {
@@ -45,26 +54,26 @@ const headers = [
   "Acciones"
 ];
 
-const rows = [
+const rows: StudentData[] = [
   {
-    idAlumno: 1,
-    Nombres: "Juan",
-    Apellidos: "Pérez",
-    Corrreo: "juan.perez@example.com",
-    Telefono: "123456789",
-    ValoracionEscolar: "Excelente",
-    ValoracionBiblica: "Buena",
-    Estado: true
+    studentId: 1,
+    firstName: "Juan",
+    lastName: "Pérez",
+    email: "juan.perez@example.com",
+    phone: "123456789",
+    academicRating: "Excelente",
+    biblicalRating: "Buena",
+    status: true
   },
   {
-    idAlumno: 2,
-    Nombres: "María",
-    Apellidos: "González",
-    Corrreo: "maria.gonzalez@example.com",
-    Telefono: "987654321",
-    ValoracionEscolar: "Regular",
-    ValoracionBiblica: "Excelente",
-    Estado: false
+    studentId: 2,
+    firstName: "María",
+    lastName: "González",
+    email: "maria.gonzalez@example.com",
+    phone: "987654321",
+    academicRating: "Regular",
+    biblicalRating: "Excelente",
+    status: false
   }
 ];
 
@@ -89,7 +98,7 @@ const rows = [
           <div>
             <GroupTable headers={headers} rows={rows} OpenOnEditModal={() => {handleOpenModal(true,"edit")}} onEditButton={handleInfoToModal}  OpenOnDeletetModal={() => {handleOpenModal(true,"Delete")}}/>
             <Modal   isOpen={isModalOpenEdit} onClose={() => handleOpenModal(false,"edit")}>
-                <FormStudents  data={actualInfo} onChange={setActualInfo} type={typeOfModal} ></FormStudents>
+              <StudentFormEdit  data={actualInfo} onChange={setActualInfo} type={typeOfModal} />
             </Modal>
           </div>
     

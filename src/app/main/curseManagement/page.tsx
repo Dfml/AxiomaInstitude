@@ -6,7 +6,7 @@ import Cards from "@/app/components/Cards";
 import CardPlusButton from "@/app/components/CardPlusButton";
 import Modal from "@/app/components/Modal";
 import FormManagerCourse from "@/app/components/FormManageCourse"
-import{DataCours} from "@/app/components/FormManageCourse"
+import{CourseData} from "@/app/components/FormManageCourse"
 import React, {  useState } from 'react';
 
 
@@ -21,8 +21,8 @@ export default function Home() {
 const [isModalOpenEdit, setIsModalOpenEdit ] = useState(false);
 const [typeOfModal, setTypeOfModal ] = useState("");
 
-const [actualInfo, setActualInfo ] = useState<DataCours>({NombreCurso:"", });
-const handleInfoToModal = (info:DataCours) => {
+const [actualInfo, setActualInfo ] = useState<CourseData>({courseName:"", });
+const handleInfoToModal = (info:CourseData) => {
     setActualInfo (info);
     // Aquí podrías hacer un fetch o llamar a una función que haga la petición a tu API
   };
@@ -39,18 +39,18 @@ const handleUpdate = () => {
 
 const dataCart = [
   {
-    curso: "Matemáticas",
-    gruposActivos: "00000",
-    maestrosLibres: "0000",
-    designacion: "LXLXLXL",
-    cantidadEstudiantes: "0000",
+    course: "Mathematics",
+    activeGroups: "00000",
+    availableTeachers: "0000",
+    designation: "LXLXLXL",
+    enrolledStudents: "0000",
   },
   {
-    curso: "Biblia",
-    gruposActivos: "00001",
-    maestrosLibres: "0003",
-    designacion: "MXMXMXM",
-    cantidadEstudiantes: "0012",
+    course: "Bible",
+    activeGroups: "00001",
+    availableTeachers: "0003",
+    designation: "MXMXMXM",
+    enrolledStudents: "0012",
   }
 ];
 
@@ -60,14 +60,14 @@ const dataCart = [
   return (
       <div className="p-10 flex flex-wrap gap-6">
       {dataCart.map((item, index) => (
-        <Cards OpenOnEditModal={() => {handleOpenModal(true,"edit")}} onEditButton={()=>handleInfoToModal({NombreCurso:item.curso})}  OpenOnDeletetModal={() => {handleOpenModal(true,"Delete")}} 
+        <Cards OpenOnEditModal={() => {handleOpenModal(true,"edit")}} onEditButton={()=>handleInfoToModal({courseName:item.course})}  OpenOnDeletetModal={() => {handleOpenModal(true,"Delete")}} 
           key={index}
-          label={`${item.curso}`}
+          label={`${item.course}`}
           data={[
-            { label: "Grupos Activos", value: item.gruposActivos },
-            { label: "Maestros Libres", value: item.maestrosLibres },
-            { label: "Designación", value: item.designacion },
-            { label: "Estudiantes inscritos", value: item.cantidadEstudiantes },
+            { label: "Grupos Activos", value: item.activeGroups },
+            { label: "Maestros Libres", value: item.availableTeachers },
+            { label: "Designación", value: item.designation },
+            { label: "Estudiantes inscritos", value: item.enrolledStudents },
           ]}
         />
       ))}

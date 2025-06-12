@@ -4,8 +4,8 @@ import Button from "@/app/components/Button";
 
 export interface DataUsers {
 
-  Usuario: string;
-  Nombre: string;
+  User: string;
+  Name: string;
   Password: string;
 
 }
@@ -24,8 +24,8 @@ export default function GroupFormEdit({
   
   const [formData, setFormData] = useState<DataUsers>({
 
-    Usuario: "",
-    Nombre: "",
+    User: "",
+    Name: "",
     Password: "",
     
   });
@@ -80,7 +80,7 @@ export default function GroupFormEdit({
               id="Usuario"
               name="Usuario"
               disabled={type == "Delete"}
-              value={formData.Usuario}
+              value={formData.User}
                 onChange={handleChange}
               readOnly
               className="border border-[#0C2340] rounded-md px-3 py-2 placeholder:text-[#0C2340] placeholder:italic bg-[#F0F4F8]"
@@ -97,7 +97,7 @@ export default function GroupFormEdit({
           <input
             id="Nombre"
             name="Nombre"
-            value={formData.Nombre}
+            value={formData.Name}
             disabled={type == "Delete"}
             onChange={handleChange}
             className="border border-[#0C2340] rounded-md px-3 py-2 text-[#0C2340] bg-[#F0F4F8]"
