@@ -22,9 +22,9 @@ export default function Home() {
           className="w-34 mx-auto "
         ></Image>
 
-        <h1 className="text-tangaroa-950 mt-3 text-3xl text-center w-full ">
+        {/* <h1 className="text-tangaroa-950 mt-3 text-3xl text-center w-full ">
           Instituto Axioma
-        </h1>
+        </h1> */}
 
         <div className="flex flex-col mt-6  w-70   items-center ">
           <TextBox
